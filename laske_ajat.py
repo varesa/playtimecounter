@@ -9,10 +9,8 @@ f = open('peliajat')
 lines = [line.strip() for line in f.readlines()]
 f.close()
 
-state     = ""
 totaltime = 0
 
-linetime  = 0
 oldtime   = 0
 
 for line in lines:
@@ -21,11 +19,10 @@ for line in lines:
 
 	if "connecting" in line:
 		print("connecting")
-		state = "c"
 	
 	elif "lost con" in line:
 		print("disconnect")
-		if state is "c" and oldtime > 0:
+		if oldtime > 0:
 			timespent = time.mktime(newtime) - time.mktime(oldtime)
 			
 			h = math.floor(timespent / 3600)
@@ -36,8 +33,6 @@ for line in lines:
 
 			totaltime += timespent
 
-		
-		state = "d"
 	oldtime = newtime
 
 
