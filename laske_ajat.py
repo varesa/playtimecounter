@@ -1,11 +1,15 @@
 #!/usr/bin/env python
 
+import sys
 import time
 import math
 
+if len(sys.argv) < 2:
+    raise Exception("No file provided (pass as first argument)")
+
 print("Counting time")
 
-f = open('peliajat')
+f = open(sys.argv[1])
 lines = [line.strip() for line in f.readlines()]
 f.close()
 
