@@ -18,7 +18,6 @@ oldtime   = 0
 for line in lines:
 
 	newtime = time.strptime(line[:19], "%Y-%m-%d %H:%M:%S")
-	#print(line[:19])
 
 	if "connecting" in line:
 		print("connecting")
@@ -27,15 +26,12 @@ for line in lines:
 	elif "lost con" in line:
 		print("disconnect")
 		if state is "c" and oldtime > 0:
-			#print("start: " + str(time.mktime(oldtime)))
-			#print("stop : " + str(time.mktime(newtime)))
 			timespent = time.mktime(newtime) - time.mktime(oldtime)
 			
 			h = math.floor(timespent / 3600)
 			m = math.floor((timespent - h*3600) / 60)
 			s = timespent - h*3600 - m*60
 			
-			#print("secs : " + str(timespent))
 			print("h: " + str(h) + ", m: " + str(m) + ", s: " + str(s))
 
 			totaltime += timespent
